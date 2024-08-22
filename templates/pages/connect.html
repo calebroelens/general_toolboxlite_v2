@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% block extra_imports %}
+<script src="/static/pages/connect/database.js"></script>
+<script src="/static/pages/connect/connect.js"></script>
+{% endblock %}
+{% block content %}
+<section class="section hero is-link">
+   <div class="hero-body">
+       <p class="title">Connections</p>
+       <p class="subtitle">Connect to an Odoo instance</p>
+       <nav class="level">
+        <div class="level-left">
+            <p class="control">
+              <a class="button" href="/apps">Return to apps</a>
+            </p>
+        </div>
+       </nav>
+   </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="box">
+            <p class="title">Quick connect</p>
+            <div class="field is-grouped">
+                <p class="control has-icons-left is-expanded">
+                    <input class="input" type="url" placeholder="URL" id="url">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-globe"></i>
+                    </span>
+                </p>
+                <p class="control has-icons-left">
+                    <input class="input" type="number" placeholder="port" id="port">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-ethernet"></i>
+                    </span>
+                </p>
+                <p class="control">
+                    <button class="button is-info" id="search_databases">
+                        <span class="icon is-small">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <span>Search database</span>
+                    </button>
+                </p>
+            </div>
+            <div class="field is-grouped">
+                <p class="control has-icons-left is-expanded">
+                    <input class="input" list="database_list" id="database_choice">
+                    <datalist id="database_list">
+                        <option value="db"></option>
+                    </datalist>
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-database"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field is-grouped">
+                <p class="control has-icons-left is-expanded">
+                    <input class="input" type="text" placeholder="Username" id="user">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-user"></i>
+                    </span>
+                </p>
+                <p class="control has-icons-left is-expanded">
+                    <input class="input" type="password" placeholder="Password" id="password">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </p>
+                <p class="control">
+                    <button class="button is-primary" id="connect_rpc">
+                        <span class="icon is-small">
+                            <i class="fas fa-network-wired"></i>
+                        </span>
+                        <span>Connect</span>
+                    </button>
+                </p>
+            </div>
+        </div>
+        <article class="message is-danger is-hidden" id="error_box">
+            <div class="message-header">
+            <p id="error_header">Error</p>
+          </div>
+          <div class="message-body">
+            <span id="error_text"></span>
+          </div>
+        </article>
+        <article class="message is-success is-hidden" id="success_box">
+            <div class="message-header">
+            <p id="success_header">Success</p>
+          </div>
+          <div class="message-body">
+            <span id="success_text"></span>
+          </div>
+        </article>
+        <nav class="level box">
+            <div class="level-left">
+                <div class="level-item">
+                    <div class="field has-addons">
+                        <p class="control">
+                          <input class="input" type="text" placeholder="Find a connection" />
+                        </p>
+                        <p class="control">
+                          <button class="button">Search</button>
+                        </p>
+                    </div>
+                </div>
+                <div class="level-item">
+                    <button class="delete is-danger"></button>
+                </div>
+            </div>
+            <div class="level-right">
+                <p class="level-item">
+                    <button class="button is-info">
+                        <span class="icon-text">
+                            <span class="icon">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                            </span>
+                            <span>Recent</span>
+                        </span>
+                    </button>
+                </p>
+                <p class="level-item">
+                    <button class="button is-warning">
+                        <span class="icon-text">
+                            <span class="icon">
+                                <i class="fa-solid fa-star"></i>
+                            </span>
+                             <span>Favorites</span>
+                        </span>
+                    </button>
+                </p>
+            </div>
+        </nav>
+        <div class="content">
+            <div class="columns is-multiline" id="connections">
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

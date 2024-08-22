@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block extra_imports %}
+<script src="/static/pages/custom_commands/custom_commands.js"></script>
+{% endblock %}
+{% block content %}
+<section class="section hero is-warning">
+    <div class="hero-body">
+        <p class="title">Custom Commands</p>
+        <p class="subtitle">Run short RPC commands</p>
+        <nav class="level">
+        <div class="level-left">
+            <p class="control">
+              <a class="button" href="/apps">Return to apps</a>
+            </p>
+        </div>
+       </nav>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        {% if logged_in %}
+            {% if commands %}
+            <article class="message is-success" id="success_box">
+                <div class="message-header">
+                <p id="success_header">Status</p>
+              </div>
+              <div class="message-body">
+                  <p id="progress_bar_text" class="m-2">No commands are running right now.</p>
+                  <progress class="progress is-success m-2" max="100" id="progress_bar" value="0"></progress>
+              </div>
+            </article>
+            <div class="grid">
+            {% for command in commands %}
+            <div class="cell">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">{{command.title}}</p>
+                    </header>
+                    <div class="card-content">
+                        {{command.desc}}
+                    </div>
+                    <footer class="card-footer">
+                        <a class="card-footer-item" onclick="onClickCommand('{{command.technical_name}}')">Run</a>
+                    </footer>
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+            {% endif %}
+        {% else %}
+        <p>No commands available. Login first</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

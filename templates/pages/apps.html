@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block extra_imports %}
+<script>
+    let logOut = async () => {
+    await Request.get('/logout',
+        () => {
+            location.reload();
+        },
+        () => {
+            location.reload();
+        });
+};
+
+</script>
+{% endblock %}
+{% block content %}
+<section class="section hero is-danger">
+    <div class="hero-body">
+        <p class="title">Apps</p>
+        <p class="subtitle">Odoo Toolbox applications</p>
+        <nav class="level">
+            <div class="level-left">
+                {% if logged_in %}
+                <div class="level-item">
+                    You are currently logged in at&nbsp;<strong>{{server_data['url']}}</strong>
+                </div>
+                <div class="level-item">
+                    <p class="control">
+                        <button class="button" onclick="logOut();">Logout</button>
+                    </p>
+                </div>
+                {% else %}
+                <div class="level-item">
+                    You are currently not logged in.
+                </div>
+                <div class="level-item">
+                    <p class="control">
+                        <a class="button" href="/connect">Login</a>
+                    </p>
+                </div>
+                {% endif %}
+        </div>
+    </nav>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        {% if logged_in %}
+        <div class="columns is-multiline">
+            <div class="column is-one-fifth">
+                <a href="/custom_commands">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">Commands</p>
+                    </header>
+                    <div class="card-image p-2">
+                        <figure class="image">
+                            <img
+                                    src="/static/img/apps/commands.png"
+                                    alt="Commands"
+                            />
+                        </figure>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <div class="column is-one-fifth">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">Search</p>
+                    </header>
+                    <div class="card-image p-2">
+                        <figure class="image">
+                            <img
+                                    src="/static/img/apps/search.png"
+                                    alt="Commands"
+                            />
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-one-fifth">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">Security</p>
+                    </header>
+                    <div class="card-image p-2">
+                        <figure class="image">
+                            <img
+                                    src="/static/img/apps/security.png"
+                                    alt="Commands"
+                            />
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-one-fifth">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">User</p>
+                    </header>
+                    <div class="card-image p-2">
+                        <figure class="image">
+                            <img
+                                    src="/static/img/apps/user.png"
+                                    alt="Commands"
+                            />
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <p>No applications available. Login first</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
